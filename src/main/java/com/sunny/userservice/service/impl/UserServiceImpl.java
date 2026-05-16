@@ -3,6 +3,9 @@ package com.sunny.userservice.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.sunny.userservice.dto.UserRequest;
@@ -43,6 +46,12 @@ public class UserServiceImpl implements UserService {
 				new UserNotFoundException("user not found " + id)); 
 		       //this line mean we r just telling kuch exception hua hai.
 		
+	}
+
+	@Override
+	public Page<User> getUsersWithPagination(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size);
+		return userRepository.findAll(pageable);
 	}
 
 }

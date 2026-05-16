@@ -3,6 +3,7 @@ package com.sunny.userservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -44,6 +45,13 @@ public class UserController {
 	public ResponseEntity<User> getUserById(@RequestParam Long id) {
 		User user = userService.getUserById(id);
 		return ResponseEntity.ok(user);
+	}
+	
+	@GetMapping("/pagination")
+	public ResponseEntity<Page<User>>getUserWithPagination(@RequestParam int page, int size){
+		
+		return ResponseEntity.ok(userService.getUsersWithPagination(page, size));
+		
 	}
 
 }
